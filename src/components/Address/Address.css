@@ -1,0 +1,15 @@
+.address-container {
+    display: flex;
+}
+.billing-container {
+    width: 50%;
+}
+.label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: black;
+}
+.shipping-container {
+    width: 50%;
+}
