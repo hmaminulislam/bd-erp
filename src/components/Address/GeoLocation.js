@@ -10,45 +10,100 @@ const geonames = new Geonames({
 
 const GeoLocation = (props) => {
     const { geoId, onChange, isCountry } = props;
-    const [currentItem, setCurrentItem] = useState('');
     const [options, setOptions] = useState([]);
+    const [content, setContent] = useState(false);
+    const [selected, setSelected] = useState(null);
+    const [search, setSearch] = useState('');
+    const [subOptions, setSubOptions] = useState('')
+   
  
     useEffect(() => {
       try {
         const data = async () => {
           (await isCountry)
             ? geonames.countryInfo({}).then((res) => {
-                console.log(res);
                 setOptions(res.geonames);
               })
             : geonames.children({ geonameId: geoId }).then((res) => {
-                if (res.totalResultsCount) setOptions(res.geonames);
+                if (res.totalResultsCount) setSubOptions(res.geonames);
               });
         };
         data();
       } catch (err) {
         console.error(err);
       }
-    }, [geoId, isCountry]);
+    }, [geoId, isCountry, content]);
 
-    const handleChange = (e) => {
-        setCurrentItem(e.target.value)
-        onChange(e.target.value)
+    const handleContent = () => {
+      setContent(true)
     }
-
+    
+    const handleSelect = (e) => {
+      setSelected(e.target.innerText)
+      onChange(e.target.value);
+      setContent(false)
+    }
     return (
       <div className="select-box">
-        <select value={currentItem} onChange={handleChange}>
-          <option selected disabled>
-            Please Search
-          </option>
-          {options.map((option, index) => (
-            <option key={index} value={option.geonameId}>
-              {isCountry ? option.countryName : option.name}
-            </option>
-          ))}
-        </select>
-        
+        <>
+          <div
+            onClick={handleContent}
+            className={`select-btn`}
+          >
+            {selected ? <span>{selected}</span> : <span>Please Search</span>}
+          </div>
+            <>
+              <div className={`content ${content? 'active' : 'deactive'}`}>
+                <div className="search">
+                  <input
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    placeholder="Search"
+                    value={search}
+                  />
+                </div>
+                <ul className="options">
+                  {subOptions ? (
+                    <>
+                      {subOptions
+                        .filter((item) => {
+                          return search.toLowerCase() === ""
+                            ? item
+                            : item.name.toLowerCase().includes(search.toLowerCase());
+                        })
+                        .map((option, index) => (
+                          <li
+                            onClick={(e) => handleSelect(e)}
+                            key={index}
+                            value={option.geonameId}
+                          >
+                            {isCountry ? option.countryName : option.name}
+                          </li>
+                        ))}
+                    </>
+                  ) : (
+                    <>
+                      {options
+                        .filter((item) => {
+                          return search.toLowerCase() === ""
+                            ? item
+                            : item.countryName.toLowerCase().includes(search.toLowerCase());
+                        })
+                        .map((option, index) => (
+                          <li
+                            onClick={(e) => handleSelect(e)}
+                            key={index}
+                            value={option.geonameId}
+                          >
+                            {isCountry ? option.countryName : option.name}
+                          </li>
+                        ))}
+                    </>
+                  )}
+                </ul>
+              </div>
+            </>
+        </>
       </div>
     );
 };

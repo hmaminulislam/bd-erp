@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Address.css'
 import GeoLocation from './GeoLocation';
+import GeoNames from './GeoNames';
 
 
 const Address = () => {
@@ -9,6 +10,7 @@ const Address = () => {
   const [district, setDistrict] = useState("");
   const [city, setCity] = useState("");
   const [town, setTown] = useState("");
+  console.log(country);
     return (
       <div className="address-container">
         <div className="billing-container">
@@ -29,47 +31,10 @@ const Address = () => {
         </div>
         <div className="shipping-container">
           <h2>Shipping address</h2>
+          <GeoNames></GeoNames>
         </div>
       </div>
     );
 };
 
 export default Address;
-
-
-// import React, { useState } from "react";
-// import Select from "react-select";
-
-// export default function Address() {
-//   // React state to manage selected options
-//   const [selectedOptions, setSelectedOptions] = useState();
-
-//   // Array of all options
-//   const optionList = [
-//     { value: "red", label: "Red" },
-//     { value: "green", label: "Green" },
-//     { value: "yellow", label: "Yellow" },
-//     { value: "blue", label: "Blue" },
-//     { value: "white", label: "White" }
-//   ];
-
-//   // Function triggered on selection
-//   function handleSelect(data) {
-//     setSelectedOptions(data);
-//   }
-//   return (
-//     <div className="app">
-//       <h2>Choose your color</h2>
-//       <div className="dropdown-container">
-//         <Select
-//           options={optionList}
-//           placeholder="Select color"
-//           value={selectedOptions}
-//           onChange={handleSelect}
-//           isSearchable={true}
-//           isMulti
-//         />
-//       </div>
-//     </div>
-//   );
-// }

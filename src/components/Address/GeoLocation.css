@@ -1,6 +1,5 @@
 .select-box {
     width: 100%;
-    position: relative;
 }
 .select-box select {
     height: 25px;
@@ -14,12 +13,12 @@
     outline: none;
 }
 
-.select-box::after {
+.select-btn::after {
     content: "";
     position: absolute;
     right: 12px;
     top: 50%;
-    margin-top: -5px;
+    margin-top: -2px;
     border-top: 5px solid #64656e;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
@@ -27,4 +26,89 @@
 
 .select-box select:focus {
     border: 1px solid green;
+}
+
+.select-btn {
+    height: 25px;
+    line-height: 25px;
+    padding: 0 10px;
+    font-size: 13px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    position: relative;
+    max-width: 550px;
+}
+.content {
+    padding: 5px;
+    margin-top: 2px;
+    background: #fff;
+    border: 1px solid #c0c0c0;
+    position: absolute;
+    width: 560px;
+    z-index: 999;
+}
+.active {
+    display: block;
+}
+.deactive {
+    display: none;
+}
+.content .search {
+    position: relative;
+}
+
+.search input {
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.search input:focus {
+    border: 2px solid #4285f4;
+}
+
+.search input::placeholder {
+    color: #bfbfbf;
+}
+
+.content .options {
+    margin-top: 10px;
+    max-height: 210px;
+    overflow-y: auto;
+    padding-right: 7px;
+}
+
+.options::-webkit-scrollbar {
+    width: 7px;
+}
+
+.options::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px;
+}
+
+.options::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 25px;
+}
+
+.options::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+}
+
+.options li {
+    height: 23px;
+    font-size: 13px;
+    list-style: none;
+}
+
+.options li:hover,li.selected {
+    border-radius: 5px;
+    background: #e7e7e7;
 }
