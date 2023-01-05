@@ -12,7 +12,19 @@
     font-size: 12px;
     outline: none;
 }
-
+.input-field {
+    max-width: 570px;
+}
+.input-field input {
+    height: 25px;
+    line-height: 25px;
+    font-size: 13px;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
 .select-btn::after {
     content: "";
     position: absolute;
@@ -81,7 +93,7 @@
     margin-top: 10px;
     max-height: 210px;
     overflow-y: auto;
-    padding-right: 7px;
+    padding: 0 10px;
 }
 
 .options::-webkit-scrollbar {
@@ -109,6 +121,5 @@
 }
 
 .options li:hover,li.selected {
-    border-radius: 5px;
     background: #e7e7e7;
 }

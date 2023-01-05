@@ -33,10 +33,6 @@ const GeoLocation = (props) => {
         console.error(err);
       }
     }, [geoId, isCountry, content]);
-
-    const handleContent = () => {
-      setContent(true)
-    }
     
     const handleSelect = (e) => {
       setSelected(e.target.innerText)
@@ -46,63 +42,65 @@ const GeoLocation = (props) => {
     return (
       <div className="select-box">
         <>
-          <div
-            onClick={handleContent}
-            className={`select-btn`}
-          >
+          <div onClick={() => setContent(!content)} className={`select-btn`}>
             {selected ? <span>{selected}</span> : <span>Please Search</span>}
           </div>
-            <>
-              <div className={`content ${content? 'active' : 'deactive'}`}>
-                <div className="search">
-                  <input
-                    onChange={(e) => setSearch(e.target.value)}
-                    type="text"
-                    placeholder="Search"
-                    value={search}
-                  />
-                </div>
-                <ul className="options">
-                  {subOptions ? (
-                    <>
-                      {subOptions
-                        .filter((item) => {
-                          return search.toLowerCase() === ""
-                            ? item
-                            : item.name.toLowerCase().includes(search.toLowerCase());
-                        })
-                        .map((option, index) => (
-                          <li
-                            onClick={(e) => handleSelect(e)}
-                            key={index}
-                            value={option.geonameId}
-                          >
-                            {isCountry ? option.countryName : option.name}
-                          </li>
-                        ))}
-                    </>
-                  ) : (
-                    <>
-                      {options
-                        .filter((item) => {
-                          return search.toLowerCase() === ""
-                            ? item
-                            : item.countryName.toLowerCase().includes(search.toLowerCase());
-                        })
-                        .map((option, index) => (
-                          <li
-                            onClick={(e) => handleSelect(e)}
-                            key={index}
-                            value={option.geonameId}
-                          >
-                            {isCountry ? option.countryName : option.name}
-                          </li>
-                        ))}
-                    </>
-                  )}
-                </ul>
+          <>
+            <div className={`content ${content ? "active" : "deactive"}`}>
+              <div className="search">
+                <input
+                  onChange={(e) => setSearch(e.target.value)}
+                  onBlur={() => setContent(false)}
+                  type="text"
+                  placeholder="Search"
+                  value={search}
+                />
               </div>
-            </>
+              <ul className="options">
+                {subOptions ? (
+                  <>
+                    {subOptions
+                      .filter((item) => {
+                        return search.toLowerCase() === ""
+                          ? item
+                          : item.name
+                              .toLowerCase()
+                              .includes(search.toLowerCase());
+                      })
+                      .map((option, index) => (
+                        <li
+                          onClick={(e) => handleSelect(e)}
+                          key={index}
+                          value={option.geonameId}
+                        >
+                          {isCountry ? option.countryName : option.name}
+                        </li>
+                      ))}
+                  </>
+                ) : (
+                  <>
+                    {options
+                      .filter((item) => {
+                        return search.toLowerCase() === ""
+                          ? item
+                          : item.countryName
+                              .toLowerCase()
+                              .includes(search.toLowerCase());
+                      })
+                      .map((option, index) => (
+                        <li
+                          onClick={(e) => handleSelect(e)}
+                          key={index}
+                          value={option.geonameId}
+                        >
+                          {isCountry ? option.countryName : option.name}
+                        </li>
+                      ))}
+                  </>
+                )}
+              </ul>
+            </div>
+          </>
         </>
       </div>
     );
