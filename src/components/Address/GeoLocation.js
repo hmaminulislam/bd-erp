@@ -12,7 +12,7 @@ const GeoLocation = (props) => {
     const { geoId, onChange, isCountry } = props;
     const [options, setOptions] = useState([]);
     const [content, setContent] = useState(false);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState('');
     const [search, setSearch] = useState('');
     const [subOptions, setSubOptions] = useState('')
    
@@ -36,8 +36,8 @@ const GeoLocation = (props) => {
     
     const handleSelect = (e) => {
       setSelected(e.target.innerText)
-      onChange(e.target.value);
-      setContent(false)
+      onChange(e.target.value)
+      setContent(false);
     }
     return (
       <div className="select-box">

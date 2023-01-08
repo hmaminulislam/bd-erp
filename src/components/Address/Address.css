@@ -4,6 +4,24 @@
 .billing-container {
     width: 50%;
 }
+.bil-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.ship-title {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-right: 8px;
+}
+.copy-bil {
+    font-size: 18px;
+    font-weight: 500;
+    color: #0099ff;
+    cursor: pointer;
+}
 .label {
     display: block;
     font-size: 13px;
